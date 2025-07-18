@@ -1,1 +1,32 @@
+const readline = require('readline');
 
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+function calculateBodaFare(distanceInKm) {
+  const baseFare = 50;
+  const chargePerKm = 15;
+  const travelCharge = distanceInKm * chargePerKm;
+  const totalFare = baseFare + travelCharge;
+
+  console.log(`\nUko kwote? Io ni ${distanceInKm} km:`);
+  console.log(`Ukikalia Pikipiki: KES ${baseFare}`);
+  console.log(`Mpaka Uko: KES ${travelCharge}`);
+  console.log(`Total: KES ${totalFare}\n`);
+  console.log(`Panda Pikipiki!`);
+}
+
+// Prompt the user
+rl.question('Unafika wapi Mkubwa? Kilometer ngapi?: ', (input) => {
+  const distance = parseFloat(input);
+
+  if (isNaN(distance) || distance < 0) {
+    console.log('Tafadhali weka nambari sahihi ya kilomita.');
+  } else {
+    calculateBodaFare(distance);
+  }
+
+  rl.close();
+});
