@@ -1,1 +1,42 @@
+const readline = require("readline");
+
+// Function to estimate transaction fee
+function estimateTransactionFee(amountToSend) {
+  // Calculate the raw fee
+  let fee = amountToSend * 0.015;
+
+  // Apply fee caps
+  if (fee < 10) {
+    fee = 10;
+  } else if (fee > 70) {
+    fee = 70;
+  }
+
+  const totalAmount = amountToSend + fee;
+
+  // Output results
+  console.log(`\nSending KES ${amountToSend}:`);
+  console.log(`Calculated Transaction Fee: KES ${fee}`);
+  console.log(`Total amount to be debited: KES ${totalAmount}`);
+  console.log("\nSend Money Securely!");
+}
+
+// Setup readline interface
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+// Prompt the user
+rl.question("Unatuma Ngapi? (KES): ", (input) => {
+  const amount = parseFloat(input);
+
+  if (!isNaN(amount) && amount > 0) {
+    estimateTransactionFee(amount);
+  } else {
+    console.log("Tafadhali weka kiasi halali (Please enter a valid amount).");
+  }
+
+  rl.close();
+});
 
